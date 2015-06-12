@@ -7,13 +7,11 @@ function [ start_prob, alphas, data ] = paramLearn_nD( filename, dim )
     data2 = data(:, 1:dim);
     counts = data(:, dim+1);
     
-    len = sum(data(:, dim+1));
+    len = sum(counts);
     N = dot(sum(data2, 2), counts);
     start_prob = len / N;
     
     alpha0 = dir_param(data, dim);
-    %alpha0 = [0.3707;0.4522];
-    %alphas = 1;
     alphas = MLEnD(alpha0, data);
 
 

@@ -37,14 +37,14 @@ function [ alpha ] = dir_param( data,  dim)
 
 end
 
-function [grad] = gradient(alpha, C, N)
-    
-    grad = -C + N * psi(alpha);
-    grad = grad - N * psi(sum(alpha));
-end
-
-function [hess] = hessian(alpha, N)
-    vec =  N * psi(1, alpha);
-    z =  -N * psi(1, sum(alpha));
-    hess = diag(vec) + z * ones(size(alpha)) * ones(size(alpha))' ;
-end
+%function [grad] = gradient(alpha, C, N)
+%    
+%    grad = -C + N * psi(alpha);
+%    grad = grad - N * psi(sum(alpha));
+%end
+%
+%function [hess] = hessian(alpha, N)
+%    vec =  N * psi(1, alpha);
+%    z =  -N * psi(1, sum(alpha));
+%    hess = diag(vec) + z * ones(size(alpha)) * ones(size(alpha))' ;
+%end
