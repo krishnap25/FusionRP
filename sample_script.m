@@ -8,8 +8,8 @@ data = gen_synthetic_data(N, original_s, original_alpha);
 filename = 'sample_data'
 dlmwrite(filename, data);
 %%Learn parameters
-[s, alpha, data] = paramLearn_nD(filename, dim)
-display(sprintf('Parameters learnt are: s = %f and \n', s));
+[s, alpha, data] = paramLearn_nD(filename, dim);
+display(sprintf('Parameters learnt are: s = %f and', s));
 display(alpha)
 %plot_contours of data
 plotcon(data, 'real_contours', '', 0);
