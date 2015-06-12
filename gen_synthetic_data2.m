@@ -1,10 +1,9 @@
-function [data] = gen_synthetic_data(N, s, alpha, beta)
+function [data] = gen_synthetic_data2(N, s, alpha)
 %% generate n-D synthetic data for the model.
 %% N = number of customers
 %% s: start prob
 %% (alpha) = vector of parameters of dirichlet distribution
-%% n = length(alpha);
-
+    
     n = length(alpha);
     MAXR = 100;
     table_cnt = zeros(MAXR, 1);
@@ -51,45 +50,48 @@ function [data] = gen_synthetic_data(N, s, alpha, beta)
     for i = 1 : MAXR
         if table_cnt(i) == 0
             continue
-        end
-        %thetas = betarnd(alpha, beta, table_cnt(i), 1);
-	%sample dirichlet from gamma
-	x=gamrnd([0.1, 0.5, 1, 2, 4], 1);
-	thetas = x/sum(x);
+        end  
+        %sample multinomial from dirichlet
+	
+        thetas = drchrnd(alpha, table_cnt(i));                
+        samples = [];
         st_cnt = zeros(i + 1, 1);
         for j = 1 : table_cnt(i)
-            theta = thetas(j);
-            n_male = binornd(i, theta);
-            st_cnt(n_male + 1) = st_cnt(n_male + 1) + 1;
+            theta = thetas(j,:);
+            sample = mnrnd(i, theta);
+            samples = [samples; sample];
         end
-        for j = 1 : i + 1
-            if st_cnt(j) > 0
-                data = [data; (j-1) (i - j + 1) st_cnt(j)];
+        samples = sortrows(samples);
+        last = 0;
+        for j = 1 : table_cnt(i)
+            if (j == table_cnt(i)) || (isequal(samples(j,:),samples(j+1,:)) == 0)
+                data = [data; [samples(j,:) j-last]];
+                last = j;
             end
-        end
+        end               
     end
-    
+        
     large_tables = sort(large_tables);
-    last = 0;
-    thetas = betarnd(alpha, beta, size(large_tables, 1), 1);
-    n_large = size(large_tables, 1);
+    last = 0;    
+    n_large = size(large_tables, 1);    
+    thetas = drchrnd(alpha, n_large);        
     for i = 1 : n_large
         if (i == n_large) || (large_tables(i) ~= large_tables(i + 1))
-            male_cnt = [];
+            samples = [];
             for j = (last+1) : i
-                theta = thetas(j);
-                n_male = binornd(large_tables(j), theta);
-                male_cnt = [male_cnt; n_male];
-            end
-            male_cnt = sort(male_cnt);
+                theta = thetas(j,:);                                
+                sample = mnrnd(large_tables(j), theta);                                
+                samples = [samples; sample];                
+            end            
+            samples = sortrows(samples);
             tlast = 0;
-            seg_cnt = i - last;
-            for j = 1 : seg_cnt
-                if (j == seg_cnt) || (male_cnt(j) ~= male_cnt(j + 1))
-                    data = [data; male_cnt(j) (large_tables(i)-male_cnt(j)) (j-tlast)];
+            nsamples = size(samples,1);
+            for j = 1 : nsamples
+                if (j == nsamples) || (isequal(samples(j,:),samples(j+1,:)) == 0)                    
+                    data = [data; [samples(j,:) j-tlast]];
                     tlast = j;
                 end
-            end
+            end            
             last = i;
         end
     end        
