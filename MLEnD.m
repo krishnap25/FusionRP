@@ -16,10 +16,6 @@ end
 function grad = gradient(vec, data, dim)
     count = data(:, dim+1);
     dp = data(:, 1:dim);
-    %disp(vec)
-%     temp = sum(count) * (psi(sum(vec))) - ...
-%         dot(psi(sum(data, 2) + sum(vec)), count);
-%     grad = ones(dim, 1)*temp;
     grad = zeros(dim ,1);
     for i = 1:dim
         grad(i) = dot(psi(data(:, i) + vec(i)), count) - ...
@@ -41,11 +37,4 @@ function hess = hessian(vec, data, dim)
         sum(count) *  psi(1, vec(i));
     end
      
-% %     for i = 1:dim
-% %         for j=i+1:dim
-% %             hess(i, j) = temp;
-% %             hess(j, i) = temp;
-% %         end
-% %     end
-%     disp(hess);
 end

@@ -5,7 +5,8 @@ function [h] = plotcon_syn(s, a, b, logs)
     if isempty(logs)
         logs = false;
     end
-    outname = sprintf('./plots_syn/%2g_%2g_%d.pdf', a, b, logs);
+    %outname = sprintf('./plots_syn/%2g_%2g_%d.pdf', a, b, logs);
+    outname = sprintf('sample_contours.pdf');
     maxvx=25;
     maxvy=25;
     [X,Y]=meshgrid(0:maxvx,0:maxvy);

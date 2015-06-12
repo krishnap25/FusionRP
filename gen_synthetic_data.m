@@ -1,12 +1,14 @@
-function [data] = gen_synthetic_data(N, s, alpha, beta)
+function [data] = gen_synthetic_data(N, s, alpha_vector)
 %% generate 2-D synthetic data for the model.
 %% N = number of customers
 %% s: start prob
-%% (alpha, beta) = parameters of beta distribution (vector alpha in paper)
+%% alpha_vector = parameters of beta distribution (vector alpha in paper)
     MAXR = 100;
     table_cnt = zeros(MAXR, 1);
     table_cnt(1) = 1;
     large_tables = [];
+    alpha = alpha_vector(1);
+    beta = alpha_vector(2);
     for i = 2 : N
 %         if mod(i, 10000) == 0
 %             disp(sprintf('process %d out of %d customers', i, N));
