@@ -16,7 +16,8 @@ function [  ] = detect_outliers( filename, dim)
     %3: wh
     method = 2; 
     for i=1:size(data, 1);
-        logp = log_pdf(data(i, 1), data(i, 2), start_prob, param1(1), param1(2));
+        %logp = log_pdf(data(i, 1), data(i, 2), start_prob, param1(1), param1(2));
+        logp = log_pdf2(data(i, :), start_prob, param1);
         lambda = exp(log(n) + logp);
         x = data(i, 3);
         alpha = 0.01;
