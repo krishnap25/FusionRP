@@ -4,16 +4,15 @@ original_s=0.1;
 original_alpha=[1.1, 0.9];
 dim = length(original_alpha); %dimensionality
 %% Generate and save synthetic data
-data = gen_synthetic_data(N, original_s, original_alpha);
+data = gen_synthetic_data2(N, original_s, original_alpha);
 filename = 'sample_data'
 dlmwrite(filename, data);
 %%Learn parameters
 [s, alpha, data] = paramLearn_nD(filename, dim);
 display(sprintf('Parameters learnt are: s = %f and', s));
 display(alpha)
-%plot_contours of data
+%plot_contours of data: Works only for 2-D. 
+% For higher dimensions, plot marginals. 
 plotcon(data, 'real_contours', '', 0);
 % plot contours analytically
 plotcon_syn(s, alpha(1), alpha(2), 0);
-
-
