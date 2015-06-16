@@ -1,5 +1,5 @@
 function [  ] = detect_outliers( filename, dim)
-%DETECT_OUTLIERS Detect outliers by poisson approx
+%DETECT_OUTLIERS Detect outliers by poisson approximation
 %   Refer to paper for details
     
     %estimate params
@@ -20,11 +20,11 @@ function [  ] = detect_outliers( filename, dim)
         lambda = exp(log(n) + logp);
         x = data(i, 3);
         alpha = 0.01;
-        if (method ==1)
-            lower = chi2inv(alpha/2, 2*data(i,3))/2;
-            upper = chi2inv(1-alpha/2, 2+2*data(i,3))/2;
-        elseif (method == 2)
-            za = norminv(1-alpha/2);
+        if (method == 1) % Exact hypothesis test
+            lower = chi2inv(alpha/2, 2*data(i,dim+1))/2;
+            upper = chi2inv(1-alpha/2, 2+2*data(i,dim+1))/2;
+        elseif (method == 2) % Continuity corrected wald test
+            za = norminv(1-alpha/2); % z_alpha
             lower = x-0.5 - za* sqrt(x-0.5);
             upper = x+0.5+ za * sqrt(x+0.5);
         elseif (method == 3)
@@ -35,15 +35,14 @@ function [  ] = detect_outliers( filename, dim)
         end
         if ~(lambda >= lower && lambda <= upper)
         %if ~(data(i, 3) >= floor(lower)-1 && data(i,3) <= ceil(upper) + 1)
-            fprintf('%d\t', [data(i, 1) data(i, 2)]);
-            fprintf('%d\t', data(i, 3));
+            fprintf('%d\t', data(i, 1:dim));
+            fprintf('%d\t', data(i, dim+1));
             fprintf('%f\t', [ lambda, lower, upper]);
             fprintf('\n');
             nout = nout + 1;
         end
     end
     display(sprintf('%d outliers out of %d' ,nout, size(data, 1)));
-
 end
 
 % function [  ] = detect_outliers( filename)
