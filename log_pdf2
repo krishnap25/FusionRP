@@ -6,6 +6,7 @@ function [ p ] = log_pdf2( x, s, alpha )
         t = 1/(1-s);
         p = log(t);
         p = p + gammaln(sum(alpha)) + gammaln(1+sum(x)) - gammaln(sum(alpha) + sum(x));
+        d = length(alpha);
         for i=1:d
           p = p + gammaln(x(i) + alpha(i)) - gammaln(alpha(i)) - gammaln(1+x(i));
         end
