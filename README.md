@@ -95,6 +95,7 @@ For each observation x, the algorithm finds:
   - an expected count: lambda
   - lower limit: lower
   - upper limit: upper
+Flag x as possible anomaly if x does not lie in the interval (lower, upper).
 
 Suggested fix:
 Assign each outlier a score based on one of the following measure of deviation:
