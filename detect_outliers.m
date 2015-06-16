@@ -1,20 +1,20 @@
-function [  ] = detect_outliers( filename)
+function [  ] = detect_outliers( filename, dim)
 %DETECT_OUTLIERS Detect outliers by poisson approx
 %   Refer to paper for details
     
     %estimate params
     option = 1;
     display(filename);
-    [start_prob, param, N, data] = beta_param(filename, option);
-    n = sum(data(:, 3));
-    param1 = MLE2D2(param, data);
-    %param1 = [0.0599; 4.8673];
+    [start_prob, param1, N, data] = paramLearn_nD(filename, dim);
+    n = sum(data(:, dim+1));
     %detect outliers
     nout = 0;
-    method = 2; 
-    %1: exact(chisq)
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %Method is which method to use:
+    %1: exact(chi square inverse)
     %2:continuity corrected wald
     %3: wh
+    method = 2; 
     for i=1:size(data, 1);
         logp = log_pdf(data(i, 1), data(i, 2), start_prob, param1(1), param1(2));
         lambda = exp(log(n) + logp);
