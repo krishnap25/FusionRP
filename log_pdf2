@@ -4,7 +4,7 @@ function [ p ] = log_pdf2( x, s, alpha )
         p = NaN;
     else
         t = 1/(1-s);
-        p = log(t);
+        p = log(t) + betaln(sum(x), 1+t);
         p = p + gammaln(sum(alpha)) + gammaln(1+sum(x)) - gammaln(sum(alpha) + sum(x));
         d = length(alpha);
         for i=1:d
