@@ -1,4 +1,4 @@
-function [ start_prob, alphas, data ] = paramLearn_nD( filename, dim )
+function [ start_prob, alphas, data, N ] = paramLearn_nD( filename, dim )
 %Learn all parameters of FusionRP
 %   dim: dimensionality of data
 
