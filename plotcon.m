@@ -8,7 +8,7 @@ function [] = plotcon(data, filename, fit, logs)
         logs = false;
     end
     %outname = sprintf('./plots/%s_%s%d.pdf', filename, fit, logs);
-    outname = sprintf('%s,pdf', filename);
+    outname = sprintf('%s.pdf', filename);
     maxvx=25;
     maxvy=25;
     [X,Y]=meshgrid(0:maxvx,0:maxvy);
