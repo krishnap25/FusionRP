@@ -1,12 +1,13 @@
-function [] = plotcon(data, filename, fit, logs)
+function [] = plotcon(data, filename)
 %% %% plot 2-D contours of real data
 %% arguments:
 %% filename: name of output file
 %% fit: additional parameter to control name of file
 %% logs = 1 -> log-scale. Use 0 as default.
-    if isempty(logs)
-        logs = false;
-    end
+    logs = false;
+    %if isempty(logs)
+    %    logs = false;
+    %end
     %outname = sprintf('./plots/%s_%s%d.pdf', filename, fit, logs);
     outname = sprintf('%s.pdf', filename);
     maxvx=25;
