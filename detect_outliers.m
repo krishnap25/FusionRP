@@ -5,7 +5,7 @@ function [  ] = detect_outliers( filename, dim)
     %estimate params
     option = 1;
     display(filename);
-    [start_prob, param1, N, data] = paramLearn_nD(filename, dim);
+    [start_prob, param1, data, N] = paramLearn_nD(filename, dim);
     n = sum(data(:, dim+1));
     %detect outliers
     nout = 0;
