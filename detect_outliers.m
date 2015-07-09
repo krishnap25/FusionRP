@@ -38,7 +38,8 @@ function [  ] = detect_outliers( filename, dim)
         %if ~(data(i, 3) >= floor(lower)-1 && data(i,3) <= ceil(upper) + 1)
             fprintf('%d\t', data(i, 1:dim));
             fprintf('%d\t', data(i, dim+1));
-            fprintf('%f\t', [ lambda, lower, upper]);
+            fprintf('%E\t', lambda);
+            fprintf('%f\t', [lower, upper]);
             fprintf('\n');
             nout = nout + 1;
         end
