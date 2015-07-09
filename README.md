@@ -95,14 +95,14 @@ For each observation x, the algorithm finds:
   - an expected count: lambda
   - lower limit: lower
   - upper limit: upper
-Flag x as possible anomaly if x does not lie in the interval (lower, upper).
+Flag x as possible anomaly if lambda does not lie in the interval (lower, upper).
 
 Suggested fix:
 Assign each outlier a score based on one of the following measure of deviation:
   - score = abs(x - lambda) / sqrt(lambda) : number of standard deviations from the mean
   - Standard deviations from confidence interval:
-    if (x > upper); score = (upper - x)/sqrt(lambda)
-    else if (x  < lower); score = (lower - x) / sqrt(lambda)
+    if (lambda > upper); score = (upper - lambda)/sqrt(lambda)
+    else if (lambda  < lower); score = (lower - lambda) / sqrt(lambda)
 Sort outliers based on the assigned outlier score and consider only the top n outliers.
 
 
