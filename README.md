@@ -99,10 +99,10 @@ Flag x as possible anomaly if lambda does not lie in the interval (lower, upper)
 
 Suggested fix:
 Assign each outlier a score based on one of the following measure of deviation:
-  - score = abs(x - lambda) / sqrt(lambda) : number of standard deviations from the mean
+  - score = abs(x - lambda) / sqrt(x) : number of standard deviations from the mean
   - Standard deviations from confidence interval:
-    if (lambda > upper); score = (upper - lambda)/sqrt(lambda)
-    else if (lambda  < lower); score = (lower - lambda) / sqrt(lambda)
+    if (lambda > upper); score = (upper - lambda)/sqrt(x)
+    else if (lambda  < lower); score = (lower - lambda) / sqrt(x)
 Sort outliers based on the assigned outlier score and consider only the top n outliers.
 
 
