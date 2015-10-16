@@ -31,8 +31,8 @@ function [h] = plotcon_syn(s, a, b, logs)
     h=figure;
     Z = griddata(data(:,1),data(:,2),data(:,3),X,Y,'cubic');
     %Z
-    v = [-2, -4, -6, -8, -10, -11.5]; %31, at_retweet_comment
-    v = [-2.5, -4, -5.5, -7, -8.1, -9.18, -10.22, -11.2]; %21, at_retweet_comment
+    %v = [-2, -4, -6, -8, -10, -11.5]; %31, at_retweet_comment
+    %v = [-2.5, -4, -5.5, -7, -8.1, -9.18, -10.22, -11.2]; %21, at_retweet_comment
     if (logs)
         contour(log(X), log(Y), Z);
     else
