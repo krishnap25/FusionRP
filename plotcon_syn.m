@@ -36,7 +36,8 @@ function [h] = plotcon_syn(s, a, b, logs)
     if (logs)
         contour(log(X), log(Y), Z);
     else
-        contour(X,Y,Z,v, 'ShowText', 'off');
+        %contour(X,Y,Z,v, 'ShowText', 'off');
+        contour(X,Y,Z, 'ShowText', 'off');
     end
 
 %     ti = get(gca,'TightInset');
